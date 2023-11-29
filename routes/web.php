@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/list', [App\Http\Controllers\ProductController::class, 'showList'])->name('list');
+Route::get('/regist',[App\Http\Controllers\ProductController::class, 'showRegistForm'])->name('regist');
+Route::post('/regist',[App\Http\Controllers\ProductController::class, 'registSubmit'])->name('submit');
