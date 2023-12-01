@@ -7,18 +7,17 @@ use App\Models\Product;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
+use App\Models\Company;
 
 class ProductController extends Controller
 {
     public function showList() {
         $model = new Product();
         $products = $model->getList();
-        $companies = $model->getList();
-        $sales = $model->getList();
+        $company_model = new Company();
+        $companies = $company_model->getList();
 
-        return view('list', ['products' => $products]);
-        return view('list', ['companies' => $companies]);
-        return view('list', ['sales' => $sales]);
+        return view('product', ['products' => $products, 'companies' => $companies]);
     }
 
     public function showRegistForm() {

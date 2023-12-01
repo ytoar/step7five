@@ -21,4 +21,11 @@ class Product extends Model
             'comment' => $data->comment,
         ]);
     }
+
+    public function getUserNameById()
+    {
+        return DB::table('products')
+                ->join('products', 'product', '=', 'company')
+                ->get();
+    }
 }
