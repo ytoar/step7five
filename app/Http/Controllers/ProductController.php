@@ -8,20 +8,27 @@ use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Company;
+use Exception;
+use PhpParser\Node\Expr\New_;
 
 class ProductController extends Controller
 {
-    public function showList() {
-        $model = new Product();
-        $products = $model->getList();
-        $company_model = new Company();
-        $companies = $company_model->getList();
+    public function showList(Request $request) {
+        $keyword = $request->input('keyword');
+        $company_search = $request->input('company_search');
 
-        return view('product', ['products' => $products, 'companies' => $companies]);
+        $model = new Product();
+        $products = $model->getList($keyword, $company_search);
+        $company_model = new Company();
+        $companies = DB::table('companies')->get();
+
+        return view('list', ['products' => $products, 'companies' => $companies]);
     }
 
     public function showRegistForm() {
-        return view('regist');
+        $companies = DB::table('companies')->get();
+
+        return view('regist', compact('companies'));
     }
 
     public function registSubmit(ProductRequest $request) {
@@ -40,6 +47,46 @@ class ProductController extends Controller
         }
     
         // 処理が完了したらregistにリダイレクト
-        return redirect(route('regist'));
+        return redirect(route('submit'));
+    }
+
+    public function deleteProduct($id) {
+        $model = new Product();
+        $products = $model->deleteP($id);
+        return redirect()->route('list');
+    }
+    
+    public function showDetail($id){
+        $model = new Product();
+        $products = $model->getProductByID($id);
+        return view('detail', ['product' => $products]);
+    }
+
+    public function showEdit($id){
+        $companies = DB::table('companies')->get();
+        $model = New Product;
+        $products = $model->getProductByID($id);
+        return view('edit', ['companies' => $companies, 'product' => $products]);
+    }
+
+    public function registEdit(ProductRequest $request, $id){
+        $model = New Product();
+        DB::beginTransaction();
+        try{
+            $image = $request->file('img_path');
+            if($image){
+                $filename = $image->getClientOriginalName();
+                $image->storeAs('public/images', $filename);
+                $img_path = 'storage/images/'.$filename;
+                $model->registEdit($request, $img_path, $id);
+            }else{
+                $model->registEditNoImg($request, $id);
+            }
+
+            DB::commit();
+            return redirect(route('detail', ['id' => $id]));
+        }catch(Exception $e){
+            DB::rollBack();
+        }
     }
 }

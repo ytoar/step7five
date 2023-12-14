@@ -21,7 +21,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100  sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -46,6 +46,19 @@
                 </div>
 
                 <div class="product2">
+                <form action="{{ route('list') }}" method="get">
+                    <div>
+                        <input type="text" name="keyword" placeholder="商品名">
+                        <select name="company_search" id="">
+                            <option value="">選択してください</option>
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                            @endforeach
+                        </select>
+                        <input type="submit" value="検索">
+                    </div>
+                </form>
+                
   <table>
      <thead>
         <tr>
@@ -54,19 +67,26 @@
             <th>商品名</th>
             <th>価格</th>
             <th>在庫数</th>
-            <th>メーカー数</th>
+            <th>メーカー名</th>
         </tr>
     </thead>
     <tbody>
     @foreach ($products as $product)
         <tr>
             <td>{{ $product->id }}</td>
-            <td>{{ $product->company_id }}</td>
+            <td>{{ $product->img_path }}</td>
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
             <td>{{ $product->comment }}</td>
-            <td>{{ $product->img_path }}</td>
+            <td>{{ $product->company_id }}</td>
+            <td><input type="button" value="詳細" onclick="location.href='{{ route('detail', ['id' => $product->id]) }}'" class="btn btn-primary"></td>
+            <td>
+                <form action="{{ route('delete', ['id' => $product->id]) }}" method="get">
+                    @csrf
+                    <input type="submit" class="btn btn-danger delete-btn" value="削除" data-delete-id="">
+                </form>
+            </td>
         </tr>
     @endforeach
     </tbody>
