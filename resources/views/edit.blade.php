@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container">
-    <button onclick="location.href='{{ route('detail', ['id' => $product-id]) }}'" class="btn btn-warning">戻る</button>
+    <button onclick="location.href='{{ route('detail', ['id' => $product->id]) }}'" class="btn btn-warning">戻る</button>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div>
                     <h1>商品編集</h1>
                 </div>
-                <form action="{{ route('registEdit', ['id' => $product-id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('registEdit', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="regist-form">
                         <div id="id-area">
@@ -27,7 +27,7 @@
                             <select name="company_id" id="">
                                 <option value="">選択してください</option>
                                 @foreach($companies as $company)
-                                    <option value="{{ $company->id }}" {{ old('company_id', $product->company_id) == $company->id }}></option>
+                                    <option value="{{ $company->id }}" {{ old('company_id', $product->company_id) == $company->id }}>{{ $company->company_name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('company_id'))

@@ -34,4 +34,4 @@ Route::delete('/products/{id}', [App\Http\Controllers\ProductController::class, 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\ProductController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\ProductController::class, 'showList'])->name('home');

@@ -22,7 +22,7 @@ class ProductController extends Controller
         $company_model = new Company();
         $companies = DB::table('companies')->get();
 
-        return view('list', ['products' => $products, 'companies' => $companies]);
+        return view('product', ['products' => $products, 'companies' => $companies]);
     }
 
     public function showRegistForm() {
@@ -58,15 +58,15 @@ class ProductController extends Controller
     
     public function showDetail($id){
         $model = new Product();
-        $products = $model->getProductByID($id);
-        return view('detail', ['product' => $products]);
+        $product = $model->getProductByID($id);
+        return view('detail', ['product' => $product]);
     }
 
     public function showEdit($id){
         $companies = DB::table('companies')->get();
         $model = New Product;
-        $products = $model->getProductByID($id);
-        return view('edit', ['companies' => $companies, 'product' => $products]);
+        $product = $model->getProductByID($id);
+        return view('edit', ['companies' => $companies, 'product' => $product]);
     }
 
     public function registEdit(ProductRequest $request, $id){

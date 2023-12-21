@@ -74,13 +74,13 @@
     @foreach ($products as $product)
         <tr>
             <td>{{ $product->id }}</td>
-            <td>{{ $product->img_path }}</td>
+            <td><img src="{{ asset($product->img_path) }}" alt="" width="100px"></td>
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
             <td>{{ $product->comment }}</td>
-            <td>{{ $product->company_id }}</td>
-            <td><input type="button" value="詳細" onclick="location.href='{{ route('detail', ['id' => $product->id]) }}'" class="btn btn-primary"></td>
+            <td>{{ $product->company_name }}</td>
+            <td><input type="button" value="詳細" onclick="location.href='{{ route('detail', ['id', =>'$product->id']) }}'" class="btn btn-primary"></td>
             <td>
                 <form action="{{ route('delete', ['id' => $product->id]) }}" method="get">
                     @csrf
