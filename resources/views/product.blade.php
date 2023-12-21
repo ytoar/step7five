@@ -80,7 +80,7 @@
             <td>{{ $product->stock }}</td>
             <td>{{ $product->comment }}</td>
             <td>{{ $product->company_name }}</td>
-            <td><input type="button" value="詳細" onclick="location.href='{{ route('detail', ['id', =>'$product->id']) }}'" class="btn btn-primary"></td>
+            <td><input type="button" value="詳細" onclick="location.href='{{ route('detail', ['id' => $product->id]) }}'" class="btn btn-primary"></td>
             <td>
                 <form action="{{ route('delete', ['id' => $product->id]) }}" method="get">
                     @csrf
