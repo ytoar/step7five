@@ -12,7 +12,7 @@
                     <table>
                         <tr>
                             <td>id</td>
-                            <td>{{ $product->id }}</td>
+                            <td>{{ $product->id }} </td>
                         </tr>
                         <tr>
                             <td>画像</td>
