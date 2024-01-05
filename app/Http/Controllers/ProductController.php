@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Company;
