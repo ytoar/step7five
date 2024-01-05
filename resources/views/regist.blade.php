@@ -13,7 +13,7 @@
                     <div class="regist-form">
                         <div id="id-area">
                             <label for="" class="form-label">id</label>
-                            <p>{{ $product->name }}</p>
+                            <p>{{ $product->id }}</p>
                         </div>
                         <div id="name-area">
                             <label for="" class="form-label">商品名</label>
