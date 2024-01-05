@@ -56,6 +56,7 @@
                             @endforeach
                         </select>
                         <input type="submit" value="検索">
+                        <button onclick="location.href='{{ route('regist') }}'" class="btn btn-warning">新規登録</button>
                     </div>
                 </form>
                 
