@@ -44,11 +44,21 @@ class ProductController extends Controller
             DB::rollback();
             return back();
         }
+        $image = $request->file('img_path');
+            if($image){
+                $filename = $image->getClientOriginalName();
+                $image->storeAs('public/images', $filename);
+                $img_path = 'storage/images/'.$filename;
+                $model->registEdit($request, $img_path, $id);
+            }else{
+                $model->registEditNoImg($request, $id);
+            }
+        
     
         // 処理が完了したらregistにリダイレクト
-        return redirect(route('submit'));
+        return redirect(route('regist'));
     }
-
+    
     public function deleteProduct($id) {
         $model = new Product();
         $products = $model->deleteP($id);

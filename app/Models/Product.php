@@ -26,10 +26,12 @@ class Product extends Model
 
     public function registProduct($data) {
         // 登録処理
-        DB::table('product')->insert([
-            'title' => $data->title,
-            'url' => $data->url,
-            'comment' => $data->comment,
+        DB::table('products')->insert([
+            'product_name' => $data->input('product_name'),
+            'company-area' => $data->input('company-area'),
+            'price' => $data->input('price'),
+            'stock' => $data->input('stock'),
+            'comment' => $data->input('comment'),
         ]);
     }
 

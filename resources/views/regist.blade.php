@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
     <button onclick="location.href='{{ route('list') }}'" class="btn btn-warning">戻る</button>
-    <button onclick="location.href='{{ route('list') }}'" class="btn btn-success">登録</button>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div>
@@ -12,34 +11,46 @@
                 <form action="{{ route('registSubmit') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="regist-form">
-                        <div id="id-area">
-                            <label for="" class="form-label">id</label>
-                            
-                        </div>
                         <div id="name-area">
                             <label for="" class="form-label">商品名</label>
                             <input type="text" name="product_name" >
+                            @if($errors->has('product_name'))
+                                <p>{{ $errors->first('product_name') }}</p>
+                            @endif
                             
                         </div>
                         <div id="company-area">
                             <label for="" class="form-label">メーカー</label>
-                            <input type="text" name="company-area">
-                            
+                            <select name="company_search" id="">
+                            <option value="">選択してください</option>
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                            @endforeach
+                            </select>
+                            @if($errors->has('company-area'))
+                                <p>{{ $errors->first('company-area') }}</p>
+                            @endif
                         </div>
                         <div id="price-area">
                             <label for="" class="form-label">価格</label>
                             <input type="text" name="price" >
-                            
+                            @if($errors->has('price'))
+                                <p>{{ $errors->first('price') }}</p>
+                            @endif
                         </div>
                         <div id="stock-area">
                             <label for="" class="form-label">在庫</label>
                             <input type="text" name="stock" >
-                            
+                            @if($errors->has('stock'))
+                                <p>{{ $errors->first('stock') }}</p>
+                            @endif
                         </div>
                         <div id="comment-area">
                             <label for="" class="form-label">コメント</label>
                             <textarea name="comment" id="" cols="30" rows="2"></textarea>
-                            
+                            @if($errors->has('comment'))
+                                <p>{{ $errors->first('comment') }}</p>
+                            @endif
                         </div>
                         <div id="old-img-area">
                             <img src="{{ asset('$companies->img_path') }}" alt="商品画像" class="img_view">
@@ -49,6 +60,7 @@
                             <input type="file" name="img_path">
                         </div>
                     </div>
+                    <input type="submit" value="登録">
                 </form>
             </div>
         </div>
