@@ -24,7 +24,7 @@
                             <select name="company_search" id="">
                             <option value="">選択してください</option>
                             @foreach ($companies as $company)
-                                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                <option value="{{ $company->search }}"{{ old('company_search', $company->company_search) == $company->search }}>{{ $company->company_name }}</option>
                             @endforeach
                             </select>
                             @if($errors->has('company-area'))
