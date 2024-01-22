@@ -63,7 +63,7 @@ class Product extends Model
         ->where('products.id', '=', $id)
         ->update([
             'product_name' => $request->input('product_name'),
-            'company_id' => $request->input('company_id'),
+            'company-area' => $request->input('company-area'),
             'price' => $request->input('price'),
             'stock' => $request->input('stock'),
             'comment' => $request->input('comment'),
@@ -76,7 +76,7 @@ class Product extends Model
         ->where('products.id', '=', $id)
         ->update([
             'product_name' => $request->input('product_name'),
-            'company_id' => $request->input('company_id'),
+            'company-area' => $request->input('company-area'),
             'price' => $request->input('price'),
             'stock' => $request->input('stock'),
             'comment' => $request->input('comment'),
