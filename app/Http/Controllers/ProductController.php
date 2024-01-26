@@ -59,6 +59,7 @@ class ProductController extends Controller
             return redirect(route('detail', ['id' => $id]));
         }catch(Exception $e){
             DB::rollBack();
+            return back();
         }
 
         // 処理が完了したらregistにリダイレクト
