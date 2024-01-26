@@ -28,7 +28,7 @@ class Product extends Model
         // 登録処理
         DB::table('products')->insert([
             'product_name' => $data->input('product_name'),
-            'company-area' => $data->input('company-area'),
+            'company_id' => $data->input('company_id'),
             'price' => $data->input('price'),
             'stock' => $data->input('stock'),
             'comment' => $data->input('comment'),
@@ -63,7 +63,7 @@ class Product extends Model
         ->where('products.id', '=', $id)
         ->update([
             'product_name' => $request->input('product_name'),
-            'company-area' => $request->input('company-area'),
+            'company_id' => $request->input('company_id'),
             'price' => $request->input('price'),
             'stock' => $request->input('stock'),
             'comment' => $request->input('comment'),
@@ -76,7 +76,7 @@ class Product extends Model
         ->where('products.id', '=', $id)
         ->update([
             'product_name' => $request->input('product_name'),
-            'company-area' => $request->input('company-area'),
+            'company_id' => $request->input('company_id'),
             'price' => $request->input('price'),
             'stock' => $request->input('stock'),
             'comment' => $request->input('comment'),

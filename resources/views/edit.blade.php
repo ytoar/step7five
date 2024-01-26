@@ -24,7 +24,7 @@
                         </div>
                         <div id="company-area">
                             <label for="" class="form-label">メーカー</label>
-                            <select name="company_id" id="">
+                            <select name="company-area" id="company_id">
                                 <option value="">選択してください</option>
                                 @foreach($companies as $company)
                                     <option value="{{ $company->id }}" {{ old('company_id', $product->company_id) == $company->id }}>{{ $company->company_name }}</option>

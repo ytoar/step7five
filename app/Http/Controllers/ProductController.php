@@ -44,7 +44,9 @@ class ProductController extends Controller
             DB::rollback();
             return back();
         }
-        $image = $request->file('img_path');
+
+        try{
+            $image = $request->file('img_path');
             if($image){
                 $filename = $image->getClientOriginalName();
                 $image->storeAs('public/images', $filename);
@@ -53,10 +55,14 @@ class ProductController extends Controller
             }else{
                 $model->registEditNoImg($request, $id);
             }
-        
-    
+            DB::commit();
+            return redirect(route('detail', ['id' => $id]));
+        }catch(Exception $e){
+            DB::rollBack();
+        }
+
         // 処理が完了したらregistにリダイレクト
-        return redirect(route('regist'));
+        return redirect(route('regist'))->with('success','商品が登録されました！');
     }
     
     public function deleteProduct($id) {
@@ -96,6 +102,7 @@ class ProductController extends Controller
             return redirect(route('detail', ['id' => $id]));
         }catch(Exception $e){
             DB::rollBack();
+            return back();
         }
     }
 }
